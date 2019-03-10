@@ -54,7 +54,7 @@ def euro(s, k, t, r, o, corp):
     d1 = (np.log(s / k) + (r + 0.5 * o ** 2) * t) / (o * np.sqrt(t))
     d2 = (np.log(s / k) + (r - 0.5 * o ** 2) * t) / (o * np.sqrt(t))
     if corp == 'call':
-        result = (s * si.norm.cdf(d1, 0.0, 1.0) - k * np.exp(-r * t) 
+        result = (s * si.norm.cdf(d1, 0.0, 1.0) - k * np.exp(-r * t)
                   * si.norm.cdf(d2, 0.0, 1.0))
     if corp == 'put':
         result = (k * np.exp(-r * t) * si.norm.cdf(-d2, 0.0, 1.0) - s 
@@ -65,10 +65,10 @@ def euro_with_dividend(s, k, t, r, d, o, corp):
     d1 = (np.log(s / k) + (r - d + 0.5 * o ** 2) * t) / (o * np.sqrt(t))
     d2 = (np.log(s / k) + (r - d - 0.5 * o ** 2) * t) / (o * np.sqrt(t))
     if corp == 'call':
-        result = (s * np.exp(-d * t) * si.norm.cdf(d1, 0.0, 1.0) - k 
+        result = (s * np.exp(-d * t) * si.norm.cdf(d1, 0.0, 1.0) - k
                   * np.exp(-r * t) * si.norm.cdf(d2, 0.0, 1.0))
     if corp == 'put':
-        result = (s * np.exp(-r * t) * si.norm.cdf(-d2, 0.0, 1.0) - s 
+        result = (s * np.exp(-r * t) * si.norm.cdf(-d2, 0.0, 1.0) - s
                   * np.exp(-d * t) * si.norm.cdf(-d1, 0.0, 1.0))
     return result
 
@@ -100,7 +100,7 @@ def monte_carlo_calculator(L):
     listofpayoffs = []
     for i in range(0,L[5]):
 
-        st = asset_price(L[0],L[4],L[3],L[2])   
+        st = asset_price(L[0],L[4],L[3],L[2])
         listofpayoffs.append(max(0.0,(st-L[1])))
     return (math.exp(-L[3] * L[2])) * (sum(listofpayoffs) / float(L[5]))
 
@@ -115,14 +115,14 @@ def monte_carlo_model():
     value = monte_carlo_calculator(L)
     print( 'Monte-Carlo evaluates to: %.4f' % value)
     option_pricing()
-        
+
 #-----------------------------------------------------------------------------#
 
 #--Binomial--#
 
 def create_recurrsive_tree(u,d,n,leaflist,counter):
     if n <= counter:
-        return leaflist    
+        return leaflist
     newleaflist = []
     for i in range(0,len(leaflist)):
         newleaflist.append(leaflist[i]*u)
@@ -176,6 +176,6 @@ def option_pricing():
         binomial_model()
     else:
         option_pricing()
-        
+
 
 option_pricing()
